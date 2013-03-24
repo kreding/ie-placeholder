@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ie-Placeholder by hadley</title>	
+	<style>
+
+input:focus,
+,textarea:focus{outline:none;border-color:#AAA;box-shadow:none;}
+input,textarea{padding:5px 10px;border:1px solid #CCC;font-size:12px;font-family:consolas;border-radius:3px;box-shadow:0px 0px 3px rgba(1,1,1,0.1);}
+
+
+/*=placeholder color= S*/
+input{color:black;}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder{color:#69C;}
+.ie-placeholder{color:#69C;}
+input::-moz-placeholder,
+textarea::-moz-placeholder{color:#69C;opacity:1;}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder{color:#69C;}
+/*=placeholder color= E*/
+body{background:#444;color:white;font-family:consolas;}
+h1{font-size:72px;line-height:1;text-shadow:0px 2px 0px black; text-align:center;}
+.wrap{width:500px;margin-left:auto;margin-right: auto;}
+dd{margin-left:0;}
+textarea{width: 100%}
+pre{font-family:consolas;font-size:12px;}
+	</style>
+</head>
+<body>
+	<h1>ie-Placeholder</h1>
+	<div class="wrap">
+		<form action="">
+			<dl>
+				<dt>Name:</dt>
+				<dd><input type="text" placeholder='ie-placeholder' ></dd>
+				<dt>by:</dt>
+				<dd><input type="text" placeholder='github.com/Hadley-Fed'></dd>		
+			</dl>			
+			<dl class="info" >
+				<dt >Describe:</dt>
+				<dd>
+					<textarea  placeholder='input/textarea[placeholder] compatible ie6-ie9' ></textarea>
+				</dd>
+			</dl>	
+			<input type="reset" value="reset">		
+		</form>		
+		<strong>HTML</strong>
+		<pre>
+&lt;input type="text" placeholder='ie-placeholder' &gt;
+&lt;textarea  placeholder='input/textarea[placeholder] compatible ie6-ie9' &gt;
+		</pre>
+		<strong>CSS</strong>
+		<pre>
+/*=placeholder color= S*/
+input{color:black;}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder{color:#69C;}
+.ie-placeholder{color:#69C;}
+input::-moz-placeholder,
+textarea::-moz-placeholder{color:#69C;opacity:1;}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder{color:#69C;}
+/*=placeholder color= E*/
+		</pre>
+		<strong>JS:</strong>
+		<pre>
+&lt;script src="http://code.jquery.com/jquery-1.8.3.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(function(){
+	fnPlaceholder()	
+})
+var fnPlaceholder=function(){
+	if(!('placeholder' in document.createElement('input'))){/* nonsupport placeholder*/
+		$("input[placeholder],textarea[placeholder]").closest('form').has(':reset').bind('reset',function(){/*click reset*/
+			setTimeout(function(){
+				$("input[placeholder],textarea[placeholder]").each(function(){
+	 				$(this).val($(this).attr('placeholder')).addClass('ie-placeholder');
+	 			})	 			
+			},0)
+
+		})
+		$("input[placeholder],textarea[placeholder]").each(function(){
+			$(this).val($(this).attr('placeholder')).addClass('ie-placeholder');
+		}).bind('focus',function(){
+			if($(this).val()==$(this).attr('placeholder')){
+				$(this).val("").removeClass('ie-placeholder')
+			}
+		}).bind('blur',function(){
+			if($(this).val().length==0){
+			$(this).val($(this).attr('placeholder')).addClass('ie-placeholder')
+			}
+		})
+	}
+}
+&lt;/script&gt;
+		</pre>
+	</div>
+<script src="script/jquery-1.8.3.min.js"></script>
+<script>
+$(function(){
+	fnPlaceholder()	
+})
+var fnPlaceholder=function(){
+	if(!('placeholder' in document.createElement('input'))){/* nonsupport placeholder*/
+		$("input[placeholder],textarea[placeholder]").closest('form').has(':reset').bind('reset',function(){/*click reset*/
+			setTimeout(function(){
+				$("input[placeholder],textarea[placeholder]").each(function(){
+	 				$(this).val($(this).attr('placeholder')).addClass('ie-placeholder');
+	 			})	 			
+			},0)
+
+		})
+		$("input[placeholder],textarea[placeholder]").each(function(){
+			$(this).val($(this).attr('placeholder')).addClass('ie-placeholder');
+		}).bind('focus',function(){
+			if($(this).val()==$(this).attr('placeholder')){
+				$(this).val("").removeClass('ie-placeholder')
+			}
+		}).bind('blur',function(){
+			if($(this).val().length==0){
+			$(this).val($(this).attr('placeholder')).addClass('ie-placeholder')
+			}
+		})
+	}
+}
+</script>
+</body>
+</html>
